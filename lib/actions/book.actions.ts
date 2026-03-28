@@ -205,6 +205,10 @@ export const searchBookSegments = async (
 
     console.log(`Searching for: "${query}" in book ${bookId}`);
 
+    if (!mongoose.Types.ObjectId.isValid(bookId)) {
+      return { success: false, error: "Invalid book ID", data: [] };
+    }
+
     const bookObjectId = new mongoose.Types.ObjectId(bookId);
 
     // Try MongoDB text search first (requires text index)
