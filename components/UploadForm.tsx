@@ -18,16 +18,16 @@ import FileUploader from "./FileUploader";
 import VoiceSelector from "./VoiceSelector";
 import { useAuth, useUser } from "@clerk/nextjs";
 import { toast } from "sonner";
-// import {
-//   checkBookExists,
-//   createBook,
-//   saveBookSegments,
-// } from "@/lib/actions/book.actions";
 import { useRouter } from "next/navigation";
 import { parsePDFFile } from "@/lib/utils";
 import { upload } from "@vercel/blob/client";
 import { Field, FieldContent, FieldError, FieldLabel } from "./ui/field";
 import LoadingOverlay from "./LoadingOverlay";
+import {
+  checkBookExists,
+  createBook,
+  saveBookSegments,
+} from "@/lib/actions/book.actions";
 
 const UploadForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -177,7 +177,7 @@ const UploadForm = () => {
             acceptTypes={ACCEPTED_PDF_TYPES}
             icon={Upload}
             placeholder="Click to upload PDF"
-            hint="PDF file (max 50MB)"
+            hint="PDF file (max 80MB)"
             disabled={isSubmitting}
           />
 
