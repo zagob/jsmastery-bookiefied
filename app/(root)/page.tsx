@@ -1,9 +1,13 @@
 import BookCard from "@/components/BookCard";
 import HeroSection from "@/components/HeroSection";
 import Search from "@/components/Search";
-import { sampleBooks } from "@/lib/constants";
+import { getAllBooks } from "@/lib/actions/book.actions";
+import { Suspense } from "react";
 
-export default function Page() {
+export default async function Page() {
+  const booksResult = await getAllBooks();
+  const books = booksResult.success ? (booksResult.data ?? []) : [];
+
   return (
     <main className="wrapper container">
       <HeroSection />
@@ -12,11 +16,13 @@ export default function Page() {
         <h2 className="text-3xl font-serif font-bold text-[#212a3b]">
           Recent Books
         </h2>
-        <Search />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Search />
+        </Suspense>
       </div>
 
       <div className="library-books-grid">
-        {sampleBooks.map((book) => (
+        {books.map((book) => (
           <BookCard
             key={book._id}
             title={book.title}
