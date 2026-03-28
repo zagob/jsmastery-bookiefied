@@ -12,11 +12,11 @@ import { Button } from "@/components/ui/button";
 import {
   ACCEPTED_PDF_TYPES,
   ACCEPTED_IMAGE_TYPES,
-  DEFAULT_VOICE,
+  // DEFAULT_VOICE,
 } from "@/lib/constants";
 import FileUploader from "./FileUploader";
 import VoiceSelector from "./VoiceSelector";
-import { useAuth, useUser } from "@clerk/nextjs";
+import { useAuth } from "@clerk/nextjs";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { parsePDFFile } from "@/lib/utils";
@@ -126,9 +126,9 @@ const UploadForm = () => {
 
       if (!book.success) {
         toast.error((book.error as string) || "Failed to create book");
-        if (book.isBillingError) {
-          router.push("/subscriptions");
-        }
+        // if (book.isBillingError) {
+        //   router.push("/subscriptions");
+        // }
         return;
       }
 
