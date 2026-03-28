@@ -109,6 +109,11 @@ export const createBook = async (data: CreateBook) => {
     // }
     const { auth } = await import("@clerk/nextjs/server");
     const { userId } = await auth();
+
+    if (!userId) {
+      return { success: false, error: "Unauthorized" };
+    }
+
     const book = await Book.create({
       ...data,
       clerkId: userId,
