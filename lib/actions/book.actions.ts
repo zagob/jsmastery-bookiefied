@@ -1,6 +1,6 @@
 "use server";
 
-import { CreateBook, TextSegment } from "@/types";
+import { CreateBook, IBook, TextSegment } from "@/types";
 import { connectToDatabase } from "@/database/mongoose";
 import { escapeRegex, generateSlug, serializeData } from "@/lib/utils";
 import Book from "@/database/models/book.model";
@@ -21,7 +21,9 @@ export const getAllBooks = async (search?: string) => {
       };
     }
 
-    const books = await Book.find(query).sort({ createdAt: -1 }).lean();
+    const books: IBook[] = await Book.find(query)
+      .sort({ createdAt: -1 })
+      .lean();
 
     return {
       success: true,
